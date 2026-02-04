@@ -9,12 +9,22 @@ const EXTERNAL_API = "https://api-books-ac3j.onrender.com";
 
 // middleware
 app.use(cors());
+// prueba
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
 app.use(express.json());
 
 // rutas
 app.get("/users", async (req, res) => {
   try {
     const response = await axios.get(`${EXTERNAL_API}/users`);
+    // hay que retornar la data recibida
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener usuarios" });
   }
@@ -23,6 +33,7 @@ app.get("/users", async (req, res) => {
 app.get("/books", async (req, res) => {
   try {
     const response = await axios.get(`${EXTERNAL_API}/books`);
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener libros" });
   }
