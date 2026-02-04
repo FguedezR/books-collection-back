@@ -24,9 +24,13 @@ app.get("/users", async (req, res) => {
   try {
     const response = await axios.get(`${EXTERNAL_API}/users`);
     // hay que retornar la data recibida
+    console.log("Datos de usuarios recibidos");
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener usuarios" });
+    console.error("Error en la API:", error.message);
+    res
+      .status(500)
+      .json({ error: "Error al obtener usuarios", details: error.message });
   }
 });
 
