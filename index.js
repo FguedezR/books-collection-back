@@ -9,14 +9,6 @@ const EXTERNAL_API = "https://api-books-ac3j.onrender.com";
 
 // middleware
 app.use(cors());
-// prueba
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  }),
-);
 app.use(express.json());
 
 // rutas
@@ -26,6 +18,7 @@ app.get("/users", async (req, res) => {
     // hay que retornar la data recibida
     console.log("Datos de usuarios recibidos");
     res.json(response.data);
+    console.log(response.data[0])
   } catch (error) {
     console.error("Error en la API:", error.message);
     res
